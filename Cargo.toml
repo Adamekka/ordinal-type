@@ -1,0 +1,10 @@
+[package]
+authors = ["Adam Cvikl <adam.wasd4@gmail.com>"]
+name = "ordinal-type"
+description = "Ordinal type for Rust"
+repository = "https://github.com/Adamekka/ordinal-type"
+license = "MIT"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
