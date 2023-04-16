@@ -3,9 +3,11 @@ authors = ["Adam Cvikl <adam.wasd4@gmail.com>"]
 name = "ordinal-type"
 description = "Ordinal type for Rust"
 repository = "https://github.com/Adamekka/ordinal-type"
+homepage = "https://github.com/Adamekka/ordinal-type"
 license = "MIT"
 version = "0.1.0"
 edition = "2021"
+readme = "README.md"
 
 [dependencies]
 num-integer = "0.1.45"
