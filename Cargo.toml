@@ -9,3 +9,6 @@ edition = "2021"
 
 [dependencies]
 num-integer = "0.1.45"
+
+[dev-dependencies]
+num-bigint = "0.4.3"
