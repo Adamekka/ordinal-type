@@ -133,7 +133,7 @@ where
     }
 }
 
-trait ToOrdinal {
+pub trait ToOrdinal {
     fn to_ordinal(&self) -> Ordinal<Self>
     where
         Self: Sized;
