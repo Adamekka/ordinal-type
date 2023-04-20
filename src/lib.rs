@@ -133,9 +133,29 @@ where
     }
 }
 
+trait ToOrdinal {
+    fn to_ordinal(&self) -> Ordinal<Self>
+    where
+        Self: Sized;
+}
+
+macro_rules! impl_to_ordinal_for_integers {
+    ($($t:ty),*) => {
+        $(
+            impl ToOrdinal for $t {
+                fn to_ordinal(&self) -> Ordinal<$t> {
+                    Ordinal(*self)
+                }
+            }
+        )*
+    };
+}
+
+impl_to_ordinal_for_integers!(u8, u16, u32, u64, u128, usize, i8, i16, i32, i64, i128, isize);
+
 #[cfg(test)]
 mod tests {
-    use crate::Ordinal;
+    use crate::{Ordinal, ToOrdinal};
     use num_bigint::{BigInt, BigUint};
 
     #[test]
@@ -414,5 +434,49 @@ mod tests {
         assert_eq!(1 as u64, Ordinal(types.9).to_primitive());
         assert_eq!(1 as u128, Ordinal(types.10).to_primitive());
         assert_eq!(1 as usize, Ordinal(types.11).to_primitive());
+    }
+
+    #[test]
+    fn test_to_ordinal_method() {
+        let types: (
+            i8,
+            i16,
+            i32,
+            i64,
+            i128,
+            isize,
+            u8,
+            u16,
+            u32,
+            u64,
+            u128,
+            usize,
+        ) = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+
+        assert_eq!(Ordinal(types.0), types.0.to_ordinal());
+        assert_eq!(Ordinal(types.1), types.1.to_ordinal());
+        assert_eq!(Ordinal(types.2), types.2.to_ordinal());
+        assert_eq!(Ordinal(types.3), types.3.to_ordinal());
+        assert_eq!(Ordinal(types.4), types.4.to_ordinal());
+        assert_eq!(Ordinal(types.5), types.5.to_ordinal());
+        assert_eq!(Ordinal(types.6), types.6.to_ordinal());
+        assert_eq!(Ordinal(types.7), types.7.to_ordinal());
+        assert_eq!(Ordinal(types.8), types.8.to_ordinal());
+        assert_eq!(Ordinal(types.9), types.9.to_ordinal());
+        assert_eq!(Ordinal(types.10), types.10.to_ordinal());
+        assert_eq!(Ordinal(types.11), types.11.to_ordinal());
+
+        assert_eq!("1st", types.0.to_ordinal().to_string());
+        assert_eq!("1st", types.1.to_ordinal().to_string());
+        assert_eq!("1st", types.2.to_ordinal().to_string());
+        assert_eq!("1st", types.3.to_ordinal().to_string());
+        assert_eq!("1st", types.4.to_ordinal().to_string());
+        assert_eq!("1st", types.5.to_ordinal().to_string());
+        assert_eq!("1st", types.6.to_ordinal().to_string());
+        assert_eq!("1st", types.7.to_ordinal().to_string());
+        assert_eq!("1st", types.8.to_ordinal().to_string());
+        assert_eq!("1st", types.9.to_ordinal().to_string());
+        assert_eq!("1st", types.10.to_ordinal().to_string());
+        assert_eq!("1st", types.11.to_ordinal().to_string());
     }
 }
