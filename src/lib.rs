@@ -26,6 +26,7 @@
 //!
 
 use num_integer::Integer;
+use num_traits::ToPrimitive;
 use std::fmt::{self, Display, Formatter};
 
 #[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Ord, PartialOrd, Hash)]
@@ -33,7 +34,7 @@ pub struct Ordinal<T>(pub T);
 
 impl<T> Display for Ordinal<T>
 where
-    T: Integer + Display,
+    T: Integer + Display + ToPrimitive + Clone,
 {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
         write!(f, "{}{}", self.0, self.suffix())
@@ -42,9 +43,18 @@ where
 
 impl<T> Ordinal<T>
 where
-    T: Integer + Display,
+    T: Integer + Display + ToPrimitive + Clone,
 {
-    fn suffix(&self) -> &'static str {
+    /// Returns the suffix of the ordinal number.
+    /// For example, `1` returns `"st"`, `2` returns `"nd"`, `3` returns `"rd"`, and `4` returns `"th"`.
+    /// This method is useful when you want to format the ordinal number yourself.
+    /// ```rust
+    /// use ordinal_type::Ordinal;
+    ///
+    /// let ordinal = Ordinal(1);
+    /// assert_eq!(ordinal.suffix(), "st");
+    /// ```
+    pub fn suffix(&self) -> &'static str {
         let last_digits: String = self.0.to_string();
         if last_digits.ends_with('1') && !last_digits.ends_with("11") {
             "st"
@@ -55,6 +65,71 @@ where
         } else {
             "th"
         }
+    }
+
+    /// Returns the primitive value of the ordinal number.
+    pub fn to_primitive(&self) -> T {
+        self.0.clone()
+    }
+
+    /// Returns the primitive value of the ordinal number as a `u8`.
+    pub fn to_u8(&self) -> u8 {
+        self.0.to_u8().expect("Failed to convert to u8")
+    }
+
+    /// Returns the primitive value of the ordinal number as a `u16`.
+    pub fn to_u16(&self) -> u16 {
+        self.0.to_u16().expect("Failed to convert to u16")
+    }
+
+    /// Returns the primitive value of the ordinal number as a `u32`.
+    pub fn to_u32(&self) -> u32 {
+        self.0.to_u32().expect("Failed to convert to u32")
+    }
+
+    /// Returns the primitive value of the ordinal number as a `u64`.
+    pub fn to_u64(&self) -> u64 {
+        self.0.to_u64().expect("Failed to convert to u64")
+    }
+
+    /// Returns the primitive value of the ordinal number as a `u128`.
+    pub fn to_u128(&self) -> u128 {
+        self.0.to_u128().expect("Failed to convert to u128")
+    }
+
+    /// Returns the primitive value of the ordinal number as a `usize`.
+    pub fn to_usize(&self) -> usize {
+        self.0.to_usize().expect("Failed to convert to usize")
+    }
+
+    /// Returns the primitive value of the ordinal number as a `i8`.
+    pub fn to_i8(&self) -> i8 {
+        self.0.to_i8().expect("Failed to convert to i8")
+    }
+
+    /// Returns the primitive value of the ordinal number as a `i16`.
+    pub fn to_i16(&self) -> i16 {
+        self.0.to_i16().expect("Failed to convert to i16")
+    }
+
+    /// Returns the primitive value of the ordinal number as a `i32`.
+    pub fn to_i32(&self) -> i32 {
+        self.0.to_i32().expect("Failed to convert to i32")
+    }
+
+    /// Returns the primitive value of the ordinal number as a `i64`.
+    pub fn to_i64(&self) -> i64 {
+        self.0.to_i64().expect("Failed to convert to i64")
+    }
+
+    /// Returns the primitive value of the ordinal number as a `i128`.
+    pub fn to_i128(&self) -> i128 {
+        self.0.to_i128().expect("Failed to convert to i128")
+    }
+
+    /// Returns the primitive value of the ordinal number as a `isize`.
+    pub fn to_isize(&self) -> isize {
+        self.0.to_isize().expect("Failed to convert to isize")
     }
 }
 
@@ -295,5 +370,49 @@ mod tests {
 
         assert_eq!("1st", Ordinal(big_types.0).to_string());
         assert_eq!("1st", Ordinal(big_types.1).to_string());
+    }
+
+    #[test]
+    fn test_to_primitive_method() {
+        let types: (
+            i8,
+            i16,
+            i32,
+            i64,
+            i128,
+            isize,
+            u8,
+            u16,
+            u32,
+            u64,
+            u128,
+            usize,
+        ) = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+
+        assert_eq!(1 as i8, Ordinal(types.0).to_i8());
+        assert_eq!(1 as i16, Ordinal(types.1).to_i16());
+        assert_eq!(1 as i32, Ordinal(types.2).to_i32());
+        assert_eq!(1 as i64, Ordinal(types.3).to_i64());
+        assert_eq!(1 as i128, Ordinal(types.4).to_i128());
+        assert_eq!(1 as isize, Ordinal(types.5).to_isize());
+        assert_eq!(1 as u8, Ordinal(types.6).to_u8());
+        assert_eq!(1 as u16, Ordinal(types.7).to_u16());
+        assert_eq!(1 as u32, Ordinal(types.8).to_u32());
+        assert_eq!(1 as u64, Ordinal(types.9).to_u64());
+        assert_eq!(1 as u128, Ordinal(types.10).to_u128());
+        assert_eq!(1 as usize, Ordinal(types.11).to_usize());
+
+        assert_eq!(1 as i8, Ordinal(types.0).to_primitive());
+        assert_eq!(1 as i16, Ordinal(types.1).to_primitive());
+        assert_eq!(1 as i32, Ordinal(types.2).to_primitive());
+        assert_eq!(1 as i64, Ordinal(types.3).to_primitive());
+        assert_eq!(1 as i128, Ordinal(types.4).to_primitive());
+        assert_eq!(1 as isize, Ordinal(types.5).to_primitive());
+        assert_eq!(1 as u8, Ordinal(types.6).to_primitive());
+        assert_eq!(1 as u16, Ordinal(types.7).to_primitive());
+        assert_eq!(1 as u32, Ordinal(types.8).to_primitive());
+        assert_eq!(1 as u64, Ordinal(types.9).to_primitive());
+        assert_eq!(1 as u128, Ordinal(types.10).to_primitive());
+        assert_eq!(1 as usize, Ordinal(types.11).to_primitive());
     }
 }
