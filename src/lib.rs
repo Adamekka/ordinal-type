@@ -373,7 +373,7 @@ mod tests {
             usize,
         ) = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
-        let big_types: (BigInt, BigUint) = ((1 as i8).into(), (1 as u8).into());
+        let big_types: (BigInt, BigUint) = (1_i8.into(), 1_u8.into());
 
         assert_eq!("1st", Ordinal(types.0).to_string());
         assert_eq!("1st", Ordinal(types.1).to_string());
@@ -409,31 +409,31 @@ mod tests {
             usize,
         ) = (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
-        assert_eq!(1 as i8, Ordinal(types.0).to_i8());
-        assert_eq!(1 as i16, Ordinal(types.1).to_i16());
-        assert_eq!(1 as i32, Ordinal(types.2).to_i32());
-        assert_eq!(1 as i64, Ordinal(types.3).to_i64());
-        assert_eq!(1 as i128, Ordinal(types.4).to_i128());
-        assert_eq!(1 as isize, Ordinal(types.5).to_isize());
-        assert_eq!(1 as u8, Ordinal(types.6).to_u8());
-        assert_eq!(1 as u16, Ordinal(types.7).to_u16());
-        assert_eq!(1 as u32, Ordinal(types.8).to_u32());
-        assert_eq!(1 as u64, Ordinal(types.9).to_u64());
-        assert_eq!(1 as u128, Ordinal(types.10).to_u128());
-        assert_eq!(1 as usize, Ordinal(types.11).to_usize());
+        assert_eq!(1_i8, Ordinal(types.0).to_i8());
+        assert_eq!(1_i16, Ordinal(types.1).to_i16());
+        assert_eq!(1_i32, Ordinal(types.2).to_i32());
+        assert_eq!(1_i64, Ordinal(types.3).to_i64());
+        assert_eq!(1_i128, Ordinal(types.4).to_i128());
+        assert_eq!(1_isize, Ordinal(types.5).to_isize());
+        assert_eq!(1_u8, Ordinal(types.6).to_u8());
+        assert_eq!(1_u16, Ordinal(types.7).to_u16());
+        assert_eq!(1_u32, Ordinal(types.8).to_u32());
+        assert_eq!(1_u64, Ordinal(types.9).to_u64());
+        assert_eq!(1_u128, Ordinal(types.10).to_u128());
+        assert_eq!(1_usize, Ordinal(types.11).to_usize());
 
-        assert_eq!(1 as i8, Ordinal(types.0).to_primitive());
-        assert_eq!(1 as i16, Ordinal(types.1).to_primitive());
-        assert_eq!(1 as i32, Ordinal(types.2).to_primitive());
-        assert_eq!(1 as i64, Ordinal(types.3).to_primitive());
-        assert_eq!(1 as i128, Ordinal(types.4).to_primitive());
-        assert_eq!(1 as isize, Ordinal(types.5).to_primitive());
-        assert_eq!(1 as u8, Ordinal(types.6).to_primitive());
-        assert_eq!(1 as u16, Ordinal(types.7).to_primitive());
-        assert_eq!(1 as u32, Ordinal(types.8).to_primitive());
-        assert_eq!(1 as u64, Ordinal(types.9).to_primitive());
-        assert_eq!(1 as u128, Ordinal(types.10).to_primitive());
-        assert_eq!(1 as usize, Ordinal(types.11).to_primitive());
+        assert_eq!(1_i8, Ordinal(types.0).to_primitive());
+        assert_eq!(1_i16, Ordinal(types.1).to_primitive());
+        assert_eq!(1_i32, Ordinal(types.2).to_primitive());
+        assert_eq!(1_i64, Ordinal(types.3).to_primitive());
+        assert_eq!(1_i128, Ordinal(types.4).to_primitive());
+        assert_eq!(1_isize, Ordinal(types.5).to_primitive());
+        assert_eq!(1_u8, Ordinal(types.6).to_primitive());
+        assert_eq!(1_u16, Ordinal(types.7).to_primitive());
+        assert_eq!(1_u32, Ordinal(types.8).to_primitive());
+        assert_eq!(1_u64, Ordinal(types.9).to_primitive());
+        assert_eq!(1_u128, Ordinal(types.10).to_primitive());
+        assert_eq!(1_usize, Ordinal(types.11).to_primitive());
     }
 
     #[test]
