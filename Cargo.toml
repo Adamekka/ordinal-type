@@ -5,7 +5,7 @@ description = "Ordinal type for Rust"
 repository = "https://github.com/Adamekka/ordinal-type"
 homepage = "https://github.com/Adamekka/ordinal-type"
 license = "MIT"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2021"
 readme = "README.md"
 
